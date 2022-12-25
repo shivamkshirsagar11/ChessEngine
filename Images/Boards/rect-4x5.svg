@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!--
+	A képet a rect.cpp generálta a következő paraméterekkel:
+	4 5 96 -edge=8
+	Felhasználási feltételek: Nevezd meg! - Így add tovább! (Creative Commons)
+	Uray M. János
+	2013-2014
+-->
+<!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
+<svg width='400' height='496' viewBox='-8 -8 400 496' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+	
+	<!-- keret -->
+	<rect fill='none' stroke='#666' stroke-width='16' stroke-linejoin='miter' x='0' y='0' width='384' height='480'/>
+	
+	<!-- mezők -->
+	<rect fill='#AAA' x='0' y='0' width='96' height='96'/>
+	<rect fill='#FFF' x='96' y='0' width='96' height='96'/>
+	<rect fill='#AAA' x='192' y='0' width='96' height='96'/>
+	<rect fill='#FFF' x='288' y='0' width='96' height='96'/>
+	<rect fill='#FFF' x='0' y='96' width='96' height='96'/>
+	<rect fill='#AAA' x='96' y='96' width='96' height='96'/>
+	<rect fill='#FFF' x='192' y='96' width='96' height='96'/>
+	<rect fill='#AAA' x='288' y='96' width='96' height='96'/>
+	<rect fill='#AAA' x='0' y='192' width='96' height='96'/>
+	<rect fill='#FFF' x='96' y='192' width='96' height='96'/>
+	<rect fill='#AAA' x='192' y='192' width='96' height='96'/>
+	<rect fill='#FFF' x='288' y='192' width='96' height='96'/>
+	<rect fill='#FFF' x='0' y='288' width='96' height='96'/>
+	<rect fill='#AAA' x='96' y='288' width='96' height='96'/>
+	<rect fill='#FFF' x='192' y='288' width='96' height='96'/>
+	<rect fill='#AAA' x='288' y='288' width='96' height='96'/>
+	<rect fill='#AAA' x='0' y='384' width='96' height='96'/>
+	<rect fill='#FFF' x='96' y='384' width='96' height='96'/>
+	<rect fill='#AAA' x='192' y='384' width='96' height='96'/>
+	<rect fill='#FFF' x='288' y='384' width='96' height='96'/>
+	
+</svg>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+	Hengersakk táblája
+	Felhasználási feltételek: Nevezd meg! - Így add tovább! (Creative Commons)
+	Uray M. János
+	2013-2014
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="800" height="784" viewBox="-16 -8 800 784" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	
+	<!-- keret -->
+	<defs>
+		<linearGradient id="left-edge" x1="0%" y1="0%" x2="100%" y2="0%" spreadMethod="pad">
+			<stop offset="0" stop-color="#666" stop-opacity="0"/>
+			<stop offset="1" stop-color="#666" stop-opacity="1"/>
+		</linearGradient>
+		<linearGradient id="right-edge" x1="0%" y1="0%" x2="100%" y2="0%" spreadMethod="pad">
+			<stop offset="0" stop-color="#666" stop-opacity="1"/>
+			<stop offset="1" stop-color="#666" stop-opacity="0"/>
+		</linearGradient>
+	</defs>
+	<rect x="-16" y="-8"  width="32"  height="8" fill="url(#left-edge)"/>
+	<rect x="16"  y="-8"  width="736" height="8" fill="#666"/>
+	<rect x="752" y="-8"  width="32"  height="8" fill="url(#right-edge)"/>
+	<rect x="-16" y="768" width="32"  height="8" fill="url(#left-edge)"/>
+	<rect x="16"  y="768" width="736" height="8" fill="#666"/>
+	<rect x="752" y="768" width="32"  height="8" fill="url(#right-edge)"/>
+	
+	<!-- sima mezők -->
+	<rect fill="#AAA" x="96" y="0" width="96" height="96"/>
+	<rect fill="#FFF" x="192" y="0" width="96" height="96"/>
+	<rect fill="#AAA" x="288" y="0" width="96" height="96"/>
+	<rect fill="#FFF" x="384" y="0" width="96" height="96"/>
+	<rect fill="#AAA" x="480" y="0" width="96" height="96"/>
+	<rect fill="#FFF" x="576" y="0" width="96" height="96"/>
+	<rect fill="#FFF" x="96" y="96" width="96" height="96"/>
+	<rect fill="#AAA" x="192" y="96" width="96" height="96"/>
+	<rect fill="#FFF" x="288" y="96" width="96" height="96"/>
+	<rect fill="#AAA" x="384" y="96" width="96" height="96"/>
+	<rect fill="#FFF" x="480" y="96" width="96" height="96"/>
+	<rect fill="#AAA" x="576" y="96" width="96" height="96"/>
+	<rect fill="#AAA" x="96" y="192" width="96" height="96"/>
+	<rect fill="#FFF" x="192" y="192" width="96" height="96"/>
+	<rect fill="#AAA" x="288" y="192" width="96" height="96"/>
+	<rect fill="#FFF" x="384" y="192" width="96" height="96"/>
+	<rect fill="#AAA" x="480" y="192" width="96" height="96"/>
+	<rect fill="#FFF" x="576" y="192" width="96" height="96"/>
+	<rect fill="#FFF" x="96" y="288" width="96" height="96"/>
+	<rect fill="#AAA" x="192" y="288" width="96" height="96"/>
+	<rect fill="#FFF" x="288" y="288" width="96" height="96"/>
+	<rect fill="#AAA" x="384" y="288" width="96" height="96"/>
+	<rect fill="#FFF" x="480" y="288" width="96" height="96"/>
+	<rect fill="#AAA" x="576" y="288" width="96" height="96"/>
+	<rect fill="#AAA" x="96" y="384" width="96" height="96"/>
+	<rect fill="#FFF" x="192" y="384" width="96" height="96"/>
+	<rect fill="#AAA" x="288" y="384" width="96" height="96"/>
+	<rect fill="#FFF" x="384" y="384" width="96" height="96"/>
+	<rect fill="#AAA" x="480" y="384" width="96" height="96"/>
+	<rect fill="#FFF" x="576" y="384" width="96" height="96"/>
+	<rect fill="#FFF" x="96" y="480" width="96" height="96"/>
+	<rect fill="#AAA" x="192" y="480" width="96" height="96"/>
+	<rect fill="#FFF" x="288" y="480" width="96" height="96"/>
+	<rect fill="#AAA" x="384" y="480" width="96" height="96"/>
+	<rect fill="#FFF" x="480" y="480" width="96" height="96"/>
+	<rect fill="#AAA" x="576" y="480" width="96" height="96"/>
+	<rect fill="#AAA" x="96" y="576" width="96" height="96"/>
+	<rect fill="#FFF" x="192" y="576" width="96" height="96"/>
+	<rect fill="#AAA" x="288" y="576" width="96" height="96"/>
+	<rect fill="#FFF" x="384" y="576" width="96" height="96"/>
+	<rect fill="#AAA" x="480" y="576" width="96" height="96"/>
+	<rect fill="#FFF" x="576" y="576" width="96" height="96"/>
+	<rect fill="#FFF" x="96" y="672" width="96" height="96"/>
+	<rect fill="#AAA" x="192" y="672" width="96" height="96"/>
+	<rect fill="#FFF" x="288" y="672" width="96" height="96"/>
+	<rect fill="#AAA" x="384" y="672" width="96" height="96"/>
+	<rect fill="#FFF" x="480" y="672" width="96" height="96"/>
+	<rect fill="#AAA" x="576" y="672" width="96" height="96"/>
+	
+	<!-- homályos mezők -->
+	<defs>
+		<linearGradient id="left1-white" x1="0%" y1="0%" x2="100%" y2="0%" spreadMethod="pad">
+			<stop offset="0" stop-color="#FFF" stop-opacity="0.5"/>
+			<stop offset="0.1667" stop-color="#FFF" stop-opacity="1"/>
+		</linearGradient>
+		<linearGradient id="left1-black" x1="0%" y1="0%" x2="100%" y2="0%" spreadMethod="pad">
+			<stop offset="0" stop-color="#AAA" stop-opacity="0.5"/>
+			<stop offset="0.1667" stop-color="#AAA" stop-opacity="1"/>
+		</linearGradient>
+		<linearGradient id="left0-white" x1="0%" y1="0%" x2="100%" y2="0%" spreadMethod="pad">
+			<stop offset="0" stop-color="#FFF" stop-opacity="0"/>
+			<stop offset="1" stop-color="#FFF" stop-opacity="0.5"/>
+		</linearGradient>
+		<linearGradient id="left0-black" x1="0%" y1="0%" x2="100%" y2="0%" spreadMethod="pad">
+			<stop offset="0" stop-color="#AAA" stop-opacity="0"/>
+			<stop offset="1" stop-color="#AAA" stop-opacity="0.5"/>
+		</linearGradient>
+		<linearGradient id="right1-white" x1="0%" y1="0%" x2="100%" y2="0%" spreadMethod="pad">
+			<stop offset="0.8333" stop-color="#FFF" stop-opacity="1"/>
+			<stop offset="1" stop-color="#FFF" stop-opacity="0.5"/>
+		</linearGradient>
+		<linearGradient id="right1-black" x1="0%" y1="0%" x2="100%" y2="0%" spreadMethod="pad">
+			<stop offset="0.8333" stop-color="#AAA" stop-opacity="1"/>
+			<stop offset="1" stop-color="#AAA" stop-opacity="0.5"/>
+		</linearGradient>
+		<linearGradient id="right0-white" x1="0%" y1="0%" x2="100%" y2="0%" spreadMethod="pad">
+			<stop offset="0" stop-color="#FFF" stop-opacity="0.5"/>
+			<stop offset="1" stop-color="#FFF" stop-opacity="0"/>
+		</linearGradient>
+		<linearGradient id="right0-black" x1="0%" y1="0%" x2="100%" y2="0%" spreadMethod="pad">
+			<stop offset="0" stop-color="#AAA" stop-opacity="0.5"/>
+			<stop offset="1" stop-color="#AAA" stop-opacity="0"/>
+		</linearGradient>
+	</defs>
+	<rect fill="url(#left0-black)"  x="-16" y="0"   width="16" height="96"/>
+	<rect fill="url(#left1-white)"  x="0"   y="0"   width="96" height="96"/>
+	<rect fill="url(#right1-black)" x="672" y="0"   width="96" height="96"/>
+	<rect fill="url(#right0-white)" x="768" y="0"   width="16" height="96"/>
+	<rect fill="url(#left0-white)"  x="-16" y="96"  width="16" height="96"/>
+	<rect fill="url(#left1-black)"  x="0"   y="96"  width="96" height="96"/>
+	<rect fill="url(#right1-white)" x="672" y="96"  width="96" height="96"/>
+	<rect fill="url(#right0-black)" x="768" y="96"  width="16" height="96"/>
+	<rect fill="url(#left0-black)"  x="-16" y="192" width="16" height="96"/>
+	<rect fill="url(#left1-white)"  x="0"   y="192" width="96" height="96"/>
+	<rect fill="url(#right1-black)" x="672" y="192" width="96" height="96"/>
+	<rect fill="url(#right0-white)" x="768" y="192" width="16" height="96"/>
+	<rect fill="url(#left0-white)"  x="-16" y="288" width="16" height="96"/>
+	<rect fill="url(#left1-black)"  x="0"   y="288" width="96" height="96"/>
+	<rect fill="url(#right1-white)" x="672" y="288" width="96" height="96"/>
+	<rect fill="url(#right0-black)" x="768" y="288" width="16" height="96"/>
+	<rect fill="url(#left0-black)"  x="-16" y="384" width="16" height="96"/>
+	<rect fill="url(#left1-white)"  x="0"   y="384" width="96" height="96"/>
+	<rect fill="url(#right1-black)" x="672" y="384" width="96" height="96"/>
+	<rect fill="url(#right0-white)" x="768" y="384" width="16" height="96"/>
+	<rect fill="url(#left0-white)"  x="-16" y="480" width="16" height="96"/>
+	<rect fill="url(#left1-black)"  x="0"   y="480" width="96" height="96"/>
+	<rect fill="url(#right1-white)" x="672" y="480" width="96" height="96"/>
+	<rect fill="url(#right0-black)" x="768" y="480" width="16" height="96"/>
+	<rect fill="url(#left0-black)"  x="-16" y="576" width="16" height="96"/>
+	<rect fill="url(#left1-white)"  x="0"   y="576" width="96" height="96"/>
+	<rect fill="url(#right1-black)" x="672" y="576" width="96" height="96"/>
+	<rect fill="url(#right0-white)" x="768" y="576" width="16" height="96"/>
+	<rect fill="url(#left0-white)"  x="-16" y="672" width="16" height="96"/>
+	<rect fill="url(#left1-black)"  x="0"   y="672" width="96" height="96"/>
+	<rect fill="url(#right1-white)" x="672" y="672" width="96" height="96"/>
+	<rect fill="url(#right0-black)" x="768" y="672" width="16" height="96"/>
+	
+</svg>
