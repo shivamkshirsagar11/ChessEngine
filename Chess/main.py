@@ -1,5 +1,6 @@
 import pygame as p
 from ChessEngine.Board import GameBoard
+from ChessEngine.MoveLibrary import MoveLib
 import numpy as np
 
 HEIGHT = WIDTH = 800  # HEIGHT AND WIDTH OF CHESS BOARD
@@ -72,16 +73,42 @@ def main():
     screen = p.display.set_mode((WIDTH, HEIGHT))
     clock = p.time.Clock()
     game_state = GameBoard()
-    draw_game_state(screen, game_state)
     global RUNNING
     if not RUNNING:
         RUNNING = True
     print(f'Playing game: {RUNNING}')
+    selected_square = ()  # to keep track of last click of user[tuple(row, column)]
+    player_click_log_from_to = np.array([])  # keep track of player clicks
     while RUNNING:
+        # print(f'Selected Square: {selected_square}')
+        # print(f'Player Clicks: {player_click_log_from_to}')
         for e in p.event.get():
             if e.type == p.QUIT:
                 RUNNING = False
+            elif e.type == p.MOUSEBUTTONDOWN:
+                location = p.mouse.get_pos()  # (x,y) location of mouse
+                row = location[1] // SQ_SIZE
+                col = location[0] // SQ_SIZE
+                if selected_square == (row, col):  # user selected same square to move
+                    # de-select current selected piece and remove any previous moves and clicks
+                    selected_square = ()
+                    player_click_log_from_to = np.array([])
+                else:
+                    selected_square = (row, col)
+                    player_click_log_from_to = np.append(player_click_log_from_to, [selected_square])
+                    # print(player_click_log_from_to)
+                if player_click_log_from_to.size == 4:
+                    move = MoveLib(player_click_log_from_to[0:2].astype(int), player_click_log_from_to[2:4].astype(int), game_state.board)
+                    if(game_state.board[int(player_click_log_from_to[0]),int(player_click_log_from_to[1])] == '--'):
+                        player_click_log_from_to = np.array([])
+                        selected_square = ()
+                    else:
+                        print(move.get_chess_notation())
+                        game_state.make_move(move)
+                        player_click_log_from_to = np.array([])
+                        selected_square = ()
         clock.tick(MAX_FPS)
+        draw_game_state(screen, game_state)
         p.display.flip()
 
 
