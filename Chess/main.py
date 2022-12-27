@@ -73,6 +73,8 @@ def main():
     screen = p.display.set_mode((WIDTH, HEIGHT))
     clock = p.time.Clock()
     game_state = GameBoard()
+    valid_moves = game_state.all_valid_move_c_check()
+    move_made = False
     global RUNNING
     if not RUNNING:
         RUNNING = True
@@ -93,26 +95,56 @@ def main():
                     # de-select current selected piece and remove any previous moves and clicks
                     selected_square = ()
                     player_click_log_from_to = np.array([])
+
                 else:
+                    # store current move and append with last move
                     selected_square = (row, col)
                     player_click_log_from_to = np.append(player_click_log_from_to, [selected_square])
                     # print(player_click_log_from_to)
+
                 if player_click_log_from_to.size == 4:
+                    # when move made becomes (row, column) * 2 == making 4 vals
                     print(f'Player turn {"White" if game_state.whiteToMove else "Black"}')
-                    move = MoveLib(player_click_log_from_to[0:2].astype(int), player_click_log_from_to[2:4].astype(int), game_state.board,game_state.whiteToMove)
-                    if(game_state.board[int(player_click_log_from_to[0]),int(player_click_log_from_to[1])] == '--'):
+                    # make intermediate temp move object
+                    move = MoveLib(player_click_log_from_to[0:2].astype(int), player_click_log_from_to[2:4].astype(int),
+                                   game_state.board)
+
+                    # now check if current selected move is '--'; then discard all
+                    if game_state.board[int(player_click_log_from_to[0]), int(player_click_log_from_to[1])] == '--':
                         player_click_log_from_to = np.array([])
                         selected_square = ()
+
                     else:
-                        print(move.get_chess_notation())
-                        game_state.make_move(move)
+                        # current selected is not '--'
+                        print(f'{move.get_chess_notation()},ID: {move}')
+                        # now if made move is in valid moves list, then do  proceed further
+                        if move in valid_moves:
+                            game_state.make_move(move)  # making move here
+                            move_made = True  # this will enable to generate new possible moves with updated board
+                        # after move is made clear our current move and from-to-move-log of game
                         player_click_log_from_to = np.array([])
                         selected_square = ()
+
             elif e.type == p.KEYDOWN:
+
+                # undo current move
                 if e.key == p.K_z and game_state.move_log.size > 0:
                     game_state.undo_moves()
+                    selected_square = ()
+                    player_click_log_from_to = np.array([])
+                    move_made = True
+                # re-do undoed move
                 elif e.key == p.K_u and game_state.undo_moves_log.size > 0:
                     game_state.redo_moves()
+                    move_made = True
+                    selected_square = ()
+                    player_click_log_from_to = np.array([])
+
+        # check if valid move made then updatte valid movelist with new
+        if move_made:
+            valid_moves = game_state.all_valid_move_c_check()
+            move_made = False
+
         clock.tick(MAX_FPS)
         draw_game_state(screen, game_state)
         p.display.flip()
