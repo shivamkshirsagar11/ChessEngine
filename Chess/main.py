@@ -98,7 +98,8 @@ def main():
                     player_click_log_from_to = np.append(player_click_log_from_to, [selected_square])
                     # print(player_click_log_from_to)
                 if player_click_log_from_to.size == 4:
-                    move = MoveLib(player_click_log_from_to[0:2].astype(int), player_click_log_from_to[2:4].astype(int), game_state.board)
+                    print(f'Player turn {"White" if game_state.whiteToMove else "Black"}')
+                    move = MoveLib(player_click_log_from_to[0:2].astype(int), player_click_log_from_to[2:4].astype(int), game_state.board,game_state.whiteToMove)
                     if(game_state.board[int(player_click_log_from_to[0]),int(player_click_log_from_to[1])] == '--'):
                         player_click_log_from_to = np.array([])
                         selected_square = ()
@@ -107,6 +108,11 @@ def main():
                         game_state.make_move(move)
                         player_click_log_from_to = np.array([])
                         selected_square = ()
+            elif e.type == p.KEYDOWN:
+                if e.key == p.K_z and game_state.move_log.size > 0:
+                    game_state.undo_moves()
+                elif e.key == p.K_u and game_state.undo_moves_log.size > 0:
+                    game_state.redo_moves()
         clock.tick(MAX_FPS)
         draw_game_state(screen, game_state)
         p.display.flip()
