@@ -75,6 +75,7 @@ def main():
     game_state = GameBoard()
     valid_moves = game_state.all_valid_move_c_check()
     move_made = False
+    moving = False
     global RUNNING
     if not RUNNING:
         RUNNING = True
@@ -88,6 +89,7 @@ def main():
             if e.type == p.QUIT:
                 RUNNING = False
             elif e.type == p.MOUSEBUTTONDOWN:
+                moving = True
                 location = p.mouse.get_pos()  # (x,y) location of mouse
                 row = location[1] // SQ_SIZE
                 col = location[0] // SQ_SIZE
@@ -141,12 +143,12 @@ def main():
                     player_click_log_from_to = np.array([])
 
         # check if valid move made then updatte valid movelist with new
+        draw_game_state(screen, game_state)
         if move_made:
             valid_moves = game_state.all_valid_move_c_check()
             move_made = False
 
         clock.tick(MAX_FPS)
-        draw_game_state(screen, game_state)
         p.display.flip()
 
 

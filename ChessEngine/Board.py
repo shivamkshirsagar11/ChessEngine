@@ -136,12 +136,14 @@ class GameBoard:
         return moves
 
     def get_all_rook_moves(self, i, j, moves:np.array):
+        count = 0
         fake_i = i
         fake_j = j
         shadow_i = i # this will go down in board simultaneously as i goes up
         shadow_j = j # this will go left in board simultaneously as j goes right
         if self.whiteToMove and self.board[fake_i,fake_j][0] != 'b':
             while i-1 > 0 or shadow_i+1 < 8 or j+1 < 8 or shadow_j-1 > 0:
+                count = count + 1
                 if i-1 > 0: # go up and check, stop when encounter white or black piece
                     if self.board[i-1,fake_j] == '--':
                         moves = np.append(moves, [MoveLib((fake_i,fake_j),(i-1,fake_j), self.board)])
@@ -180,6 +182,7 @@ class GameBoard:
 
         elif self.board[fake_i,fake_j][0] != 'w':
             while i-1 > 0 or shadow_i+1 < 8 or j+1 < 8 or shadow_j-1 > 0:
+                count = count + 1
                 if i-1 > 0: # go up and check, stop when encounter white or black piece
                     if self.board[i-1,fake_j] == '--':
                         moves = np.append(moves, [MoveLib((fake_i,fake_j),(i-1,fake_j), self.board)])
@@ -215,6 +218,7 @@ class GameBoard:
                 shadow_i = shadow_i + 1
                 j = j + 1
                 shadow_j = shadow_j - 1
+        print(count)
         return moves
 
     def get_all_bishop_moves(self, i, j, moves):
