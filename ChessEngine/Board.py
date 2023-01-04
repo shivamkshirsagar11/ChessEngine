@@ -14,7 +14,7 @@ class GameBoard:
             ['--', '--', '--', '--', '--', '--', '--', '--'],
             ['--', '--', '--', '--', '--', '--', '--', '--'],
             ['--', '--', '--', '--', '--', '--', '--', '--'],
-            ['--', '--', '--', '--', '--', '--', '--', '--'],
+            ['--', '--', '--', 'wB', '--', '--', '--', '--'],
             ['wP', 'wP', 'wP', 'wP', 'wP', 'wP', 'wP', 'wP'],
             ['wR', 'wN', 'wB', 'wQ', 'wK', 'wB', 'wN', 'wR'],
         ])
@@ -99,7 +99,7 @@ class GameBoard:
             for j in range(self.board.shape[1]):
                 piece = self.board[i, j][1]
                 if piece != '-':
-                    moves = np.append(moves, [self.move_func_dict[piece](i,j,moves)])
+                    moves = np.append(moves, [self.move_func_dict[piece](i, j, moves)])
         return moves
 
     def __str__(self):
@@ -110,6 +110,7 @@ class GameBoard:
     also check for boundary conditions if making move goes beyond board limit
     also check if in capturing the captured piece is of opposite team
     '''
+
     def get_all_pawn_moves(self, i, j, moves: np.array):
         if self.whiteToMove:
             if self.board[i - 1, j] == '--':
@@ -135,94 +136,153 @@ class GameBoard:
                     moves = np.append(moves, [MoveLib((i, j), (i + 1, j - 1), self.board)])
         return moves
 
-    def get_all_rook_moves(self, i, j, moves:np.array):
+    def get_all_rook_moves(self, i, j, moves: np.array):
         count = 0
         fake_i = i
         fake_j = j
-        shadow_i = i # this will go down in board simultaneously as i goes up
-        shadow_j = j # this will go left in board simultaneously as j goes right
-        if self.whiteToMove and self.board[fake_i,fake_j][0] != 'b':
-            while i-1 > 0 or shadow_i+1 < 8 or j+1 < 8 or shadow_j-1 > 0:
+        shadow_i = i  # this will go down in board simultaneously as i goes up
+        shadow_j = j  # this will go left in board simultaneously as j goes right
+        if self.whiteToMove and self.board[fake_i, fake_j][0] != 'b':
+            while i - 1 > 0 or shadow_i + 1 < 8 or j + 1 < 8 or shadow_j - 1 > 0:
                 count = count + 1
-                if i-1 > 0: # go up and check, stop when encounter white or black piece
-                    if self.board[i-1,fake_j] == '--':
-                        moves = np.append(moves, [MoveLib((fake_i,fake_j),(i-1,fake_j), self.board)])
-                    elif self.board[i-1,fake_j][0] == 'b' and self.board[fake_i,fake_j][0] != 'b':
+                if i - 1 > 0:  # go up and check, stop when encounter white or black piece
+                    if self.board[i - 1, fake_j] == '--':
+                        moves = np.append(moves, [MoveLib((fake_i, fake_j), (i - 1, fake_j), self.board)])
+                    elif self.board[i - 1, fake_j][0] == 'b' and self.board[fake_i, fake_j][0] != 'b':
                         moves = np.append(moves, [MoveLib((fake_i, fake_j), (i - 1, fake_j), self.board)])
                         i = 0
-                    else: i = 0
+                    else:
+                        i = 0
 
-                if shadow_i + 1 < 8: # go down and check, stop when encounter white or black piece
-                    if self.board[shadow_i+1,fake_j] == '--':
-                        moves = np.append(moves, [MoveLib((fake_i,fake_j),(shadow_i+1,fake_j), self.board)])
-                    elif self.board[shadow_i+1,fake_j][0] == 'b' and self.board[fake_i,fake_j][0] != 'b':
+                if shadow_i + 1 < 8:  # go down and check, stop when encounter white or black piece
+                    if self.board[shadow_i + 1, fake_j] == '--':
+                        moves = np.append(moves, [MoveLib((fake_i, fake_j), (shadow_i + 1, fake_j), self.board)])
+                    elif self.board[shadow_i + 1, fake_j][0] == 'b' and self.board[fake_i, fake_j][0] != 'b':
                         moves = np.append(moves, [MoveLib((fake_i, fake_j), (shadow_i + 1, fake_j), self.board)])
                         shadow_i = 7
-                    else: shadow_i = 7
+                    else:
+                        shadow_i = 7
 
-                if j + 1 < 8: # go right and check, stop when black or white piece found
-                    if self.board[fake_i,j+1] == '--':
-                        moves = np.append(moves, [MoveLib((fake_i,fake_j),(fake_i,j+1), self.board)])
-                    elif self.board[fake_i,j+1][0] == 'b' and self.board[fake_i,fake_j][0] != 'b':
-                        moves = np.append(moves, [MoveLib((fake_i, fake_j), (fake_i, j+1), self.board)])
+                if j + 1 < 8:  # go right and check, stop when black or white piece found
+                    if self.board[fake_i, j + 1] == '--':
+                        moves = np.append(moves, [MoveLib((fake_i, fake_j), (fake_i, j + 1), self.board)])
+                    elif self.board[fake_i, j + 1][0] == 'b' and self.board[fake_i, fake_j][0] != 'b':
+                        moves = np.append(moves, [MoveLib((fake_i, fake_j), (fake_i, j + 1), self.board)])
                         j = 7
-                    else: j = 7
+                    else:
+                        j = 7
 
-                if shadow_j - 1 > 0: # go left and check, stop when black or white piece found
-                    if self.board[fake_i,shadow_j - 1] == '--':
-                        moves = np.append(moves, [MoveLib((fake_i,fake_j),(fake_i,shadow_j - 1), self.board)])
-                    elif self.board[fake_i,shadow_j - 1][0] == 'b' and self.board[fake_i,fake_j][0] != 'b':
+                if shadow_j - 1 > 0:  # go left and check, stop when black or white piece found
+                    if self.board[fake_i, shadow_j - 1] == '--':
+                        moves = np.append(moves, [MoveLib((fake_i, fake_j), (fake_i, shadow_j - 1), self.board)])
+                    elif self.board[fake_i, shadow_j - 1][0] == 'b' and self.board[fake_i, fake_j][0] != 'b':
                         moves = np.append(moves, [MoveLib((fake_i, fake_j), (fake_i, shadow_j - 1), self.board)])
                         shadow_j = 0
-                    else: shadow_j = 0
+                    else:
+                        shadow_j = 0
                 i = i - 1
                 shadow_i = shadow_i + 1
                 j = j + 1
                 shadow_j = shadow_j - 1
 
-        elif self.board[fake_i,fake_j][0] != 'w':
-            while i-1 > 0 or shadow_i+1 < 8 or j+1 < 8 or shadow_j-1 > 0:
+        elif self.board[fake_i, fake_j][0] != 'w':
+            while i - 1 > 0 or shadow_i + 1 < 8 or j + 1 < 8 or shadow_j - 1 > 0:
                 count = count + 1
-                if i-1 > 0: # go up and check, stop when encounter white or black piece
-                    if self.board[i-1,fake_j] == '--':
-                        moves = np.append(moves, [MoveLib((fake_i,fake_j),(i-1,fake_j), self.board)])
-                    elif self.board[i-1,fake_j][0] == 'w' and self.board[fake_i,fake_j][0] != 'w':
+                if i - 1 > 0:  # go up and check, stop when encounter white or black piece
+                    if self.board[i - 1, fake_j] == '--':
+                        moves = np.append(moves, [MoveLib((fake_i, fake_j), (i - 1, fake_j), self.board)])
+                    elif self.board[i - 1, fake_j][0] == 'w' and self.board[fake_i, fake_j][0] != 'w':
                         moves = np.append(moves, [MoveLib((fake_i, fake_j), (i - 1, fake_j), self.board)])
                         i = 0
-                    else: i = 0
+                    else:
+                        i = 0
 
-                if shadow_i + 1 < 8: # go down and check, stop when encounter white or black piece
-                    if self.board[shadow_i+1,fake_j] == '--':
-                        moves = np.append(moves, [MoveLib((fake_i,fake_j),(shadow_i+1,fake_j), self.board)])
-                    elif self.board[shadow_i+1,fake_j][0] == 'w' and self.board[fake_i,fake_j][0] != 'w':
+                if shadow_i + 1 < 8:  # go down and check, stop when encounter white or black piece
+                    if self.board[shadow_i + 1, fake_j] == '--':
+                        moves = np.append(moves, [MoveLib((fake_i, fake_j), (shadow_i + 1, fake_j), self.board)])
+                    elif self.board[shadow_i + 1, fake_j][0] == 'w' and self.board[fake_i, fake_j][0] != 'w':
                         moves = np.append(moves, [MoveLib((fake_i, fake_j), (shadow_i + 1, fake_j), self.board)])
                         shadow_i = 7
-                    else: shadow_i = 7
+                    else:
+                        shadow_i = 7
 
-                if j + 1 < 8: # go right and check, stop when black or white piece found
-                    if self.board[fake_i,j+1] == '--':
-                        moves = np.append(moves, [MoveLib((fake_i,fake_j),(fake_i,j+1), self.board)])
-                    elif self.board[fake_i,j+1][0] == 'w'  and self.board[fake_i,fake_j][0] != 'w':
-                        moves = np.append(moves, [MoveLib((fake_i, fake_j), (fake_i, j+1), self.board)])
+                if j + 1 < 8:  # go right and check, stop when black or white piece found
+                    if self.board[fake_i, j + 1] == '--':
+                        moves = np.append(moves, [MoveLib((fake_i, fake_j), (fake_i, j + 1), self.board)])
+                    elif self.board[fake_i, j + 1][0] == 'w' and self.board[fake_i, fake_j][0] != 'w':
+                        moves = np.append(moves, [MoveLib((fake_i, fake_j), (fake_i, j + 1), self.board)])
                         j = 7
-                    else: j = 7
+                    else:
+                        j = 7
 
-                if shadow_j - 1 > 0: # go left and check, stop when black or white piece found
-                    if self.board[fake_i,shadow_j - 1] == '--':
-                        moves = np.append(moves, [MoveLib((fake_i,fake_j),(fake_i,shadow_j - 1), self.board)])
-                    elif self.board[fake_i,shadow_j - 1][0] == 'w'  and self.board[fake_i,fake_j][0] != 'w':
+                if shadow_j - 1 > 0:  # go left and check, stop when black or white piece found
+                    if self.board[fake_i, shadow_j - 1] == '--':
+                        moves = np.append(moves, [MoveLib((fake_i, fake_j), (fake_i, shadow_j - 1), self.board)])
+                    elif self.board[fake_i, shadow_j - 1][0] == 'w' and self.board[fake_i, fake_j][0] != 'w':
                         moves = np.append(moves, [MoveLib((fake_i, fake_j), (fake_i, shadow_j - 1), self.board)])
                         shadow_j = 0
-                    else: shadow_j = 0
+                    else:
+                        shadow_j = 0
                 i = i - 1
                 shadow_i = shadow_i + 1
                 j = j + 1
                 shadow_j = shadow_j - 1
-        print(count)
+        # print(count)
         return moves
 
     def get_all_bishop_moves(self, i, j, moves):
-        pass
+        fake_i = i
+        fake_j = j
+        shadow_i = i
+        shadow_j_1 = j  # quad 1
+        shadow_j_2 = j  # quad2
+
+        shadow_j_3 = j  # quad 3
+        shadow_j_4 = j  # quad 4
+        if self.whiteToMove:
+            while i - 1 > 0 or shadow_i + 1 < 8:
+                if i - 1 > 0:
+                    if shadow_j_1 + 1 < 8:
+                        if self.board[i - 1, shadow_j_1 + 1] == '--':
+                            moves = np.append(moves, [MoveLib((fake_i, fake_j), (i - 1, shadow_j_1 + 1), self.board)])
+                        elif self.board[i - 1, shadow_j_1 + 1][0] == 'b':
+                            moves = np.append(moves, [MoveLib((fake_i, fake_j), (i - 1, shadow_j_1 + 1), self.board)])
+                        else:
+                            shadow_j_1 = 7  # quad 1 is blocked now
+                    if shadow_j_2 - 1 > 0:
+                        if self.board[i - 1, shadow_j_2 - 1] == '--':
+                            moves = np.append(moves, [MoveLib((fake_i, fake_j), (i - 1, shadow_j_2 - 1), self.board)])
+                        elif self.board[i - 1, shadow_j_2 - 1][0] == 'b':
+                            moves = np.append(moves, [MoveLib((fake_i, fake_j), (i - 1, shadow_j_2 - 1), self.board)])
+                        else:
+                            shadow_j_2 = 0  # quad 2 is blocked now
+                elif shadow_i + 1 < 8:
+                    if shadow_j_3 + 1 < 8:
+                        if self.board[shadow_i + 1, shadow_j_3 + 1] == '--':
+                            moves = np.append(moves,
+                                              [MoveLib((fake_i, fake_j), (shadow_i + 1, shadow_j_3 + 1), self.board)])
+                        elif self.board[i - 1, shadow_j_1 + 1][0] == 'b':
+                            moves = np.append(moves,
+                                              [MoveLib((fake_i, fake_j), (shadow_i + 1, shadow_j_3 + 1), self.board)])
+                        else:
+                            shadow_j_3 = 7  # quad 4 is blocked now
+                    if shadow_j_4 - 1 > 0:
+                        if self.board[shadow_i + 1, shadow_j_4 - 1] == '--':
+                            moves = np.append(moves,
+                                              [MoveLib((fake_i, fake_j), (shadow_i + 1, shadow_j_4 - 1), self.board)])
+                        elif self.board[i - 1, shadow_j_4 - 1][0] == 'b':
+                            moves = np.append(moves,
+                                              [MoveLib((fake_i, fake_j), (shadow_i + 1, shadow_j_4 - 1), self.board)])
+                        else:
+                            shadow_j_4 = 0  # quad 3 is blocked now
+                shadow_i = shadow_i + 1
+                i = i - 1
+                shadow_j_1 = shadow_j_1 + 1
+                shadow_j_2 = shadow_j_2 - 1
+                shadow_j_3 = shadow_j_3 + 1
+                shadow_j_4 = shadow_j_4 - 1
+
+        return moves
 
     def get_all_knight_moves(self, i, j, moves):
         pass

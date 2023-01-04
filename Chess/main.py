@@ -1,7 +1,10 @@
 import pygame as p
 from ChessEngine.Board import GameBoard
 from ChessEngine.MoveLibrary import MoveLib
+from ChessEngine.Threading import CalculateNextMoveThread as moveThread
+from threading import Thread
 import numpy as np
+
 
 HEIGHT = WIDTH = 800  # HEIGHT AND WIDTH OF CHESS BOARD
 DIMENTIONS = 8  # DIMENTION OF CHESS BOARD
@@ -61,6 +64,7 @@ draw_game_state is responsible for all graphics related to game state
 
 
 def draw_game_state(screen, gbs):
+    # print("state drawn")
     draw_board(screen)  # draw square on board
     # add in piece high-lightning or move suggestion (later)
     draw_pieces(screen, gbs.board)  # draw pieces on top of square
@@ -143,9 +147,16 @@ def main():
                     player_click_log_from_to = np.array([])
 
         # check if valid move made then updatte valid movelist with new
-        draw_game_state(screen, game_state)
+        # draw_game_state(screen, game_state)
+        thread = Thread(target = draw_game_state, args=(screen, game_state))
+        thread.start()
+        thread.join()
         if move_made:
-            valid_moves = game_state.all_valid_move_c_check()
+            print("start")
+            mode_thread = moveThread(game_state,1)
+            mode_thread.start()
+            valid_moves = mode_thread.arr
+            print("end")
             move_made = False
 
         clock.tick(MAX_FPS)
